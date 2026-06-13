@@ -14,7 +14,7 @@
 #    limitations under the License.
 #
 
-FROM openjdk:25
+FROM eclipse-temurin:21-jdk
 COPY . /usr/src/myapp
 WORKDIR /usr/src/myapp
 RUN ./mvnw clean package
