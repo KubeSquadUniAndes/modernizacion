@@ -1,0 +1,491 @@
+{
+  "info": {
+    "name": "JPetStore Catalog Service",
+    "description": "Colección completa de endpoints del catalog-service modernizado. Levanta primero con: docker compose up postgres catalog-service -d",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/actuator/health",
+            "description": "Verifica que el servicio y PostgreSQL están UP"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Service UP', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.status).to.eql('UP');",
+                  "    pm.expect(body.components.db.status).to.eql('UP');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Categorías",
+      "item": [
+        {
+          "name": "Listar todas las categorías",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/categories",
+            "description": "Retorna las 5 categorías: FISH, DOGS, REPTILES, CATS, BIRDS"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Retorna 5 categorías', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body).to.be.an('array').with.lengthOf(5);",
+                  "});",
+                  "pm.test('Contiene FISH', () => {",
+                  "    const body = pm.response.json();",
+                  "    const ids = body.map(c => c.categoryId);",
+                  "    pm.expect(ids).to.include('FISH');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Obtener categoría FISH",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/categories/FISH",
+            "description": "Retorna la categoría Fish por su ID"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('categoryId correcto', () => {",
+                  "    pm.expect(pm.response.json().categoryId).to.eql('FISH');",
+                  "});",
+                  "pm.test('name correcto', () => {",
+                  "    pm.expect(pm.response.json().name).to.eql('Fish');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Obtener categoría DOGS",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/categories/DOGS",
+            "description": "Retorna la categoría Dogs"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('categoryId correcto', () => {",
+                  "    pm.expect(pm.response.json().categoryId).to.eql('DOGS');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Obtener categoría inexistente (404)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/categories/UNKNOWN",
+            "description": "Debe retornar 404 con JSON de error uniforme"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Body tiene status 404', () => {",
+                  "    pm.expect(pm.response.json().status).to.eql(404);",
+                  "});",
+                  "pm.test('Body tiene message', () => {",
+                  "    pm.expect(pm.response.json().message).to.include('UNKNOWN');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Productos de categoría FISH",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/categories/FISH/products",
+            "description": "Retorna los 4 productos de la categoría FISH"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Retorna 4 productos', () => {",
+                  "    pm.expect(pm.response.json()).to.be.an('array').with.lengthOf(4);",
+                  "});",
+                  "pm.test('Todos pertenecen a FISH', () => {",
+                  "    pm.response.json().forEach(p => {",
+                  "        pm.expect(p.categoryId).to.eql('FISH');",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Productos de categoría DOGS",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/categories/DOGS/products",
+            "description": "Retorna los 6 productos de la categoría DOGS"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Retorna productos', () => {",
+                  "    pm.expect(pm.response.json()).to.be.an('array').and.not.empty;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Productos de categoría inexistente (404)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/categories/UNKNOWN/products",
+            "description": "Debe retornar 404"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 404', () => pm.response.to.have.status(404));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Productos",
+      "item": [
+        {
+          "name": "Obtener producto FI-SW-01",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/products/FI-SW-01",
+            "description": "Retorna el producto Angelfish"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('productId correcto', () => {",
+                  "    pm.expect(pm.response.json().productId).to.eql('FI-SW-01');",
+                  "});",
+                  "pm.test('name correcto', () => {",
+                  "    pm.expect(pm.response.json().name).to.eql('Angelfish');",
+                  "});",
+                  "pm.test('categoryId correcto', () => {",
+                  "    pm.expect(pm.response.json().categoryId).to.eql('FISH');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Obtener producto K9-BD-01",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/products/K9-BD-01",
+            "description": "Retorna el producto Bulldog"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('name correcto', () => {",
+                  "    pm.expect(pm.response.json().name).to.eql('Bulldog');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Obtener producto inexistente (404)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/products/UNKNOWN",
+            "description": "Debe retornar 404"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 404', () => pm.response.to.have.status(404));",
+                  "pm.test('message contiene UNKNOWN', () => {",
+                  "    pm.expect(pm.response.json().message).to.include('UNKNOWN');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Ítems de producto FI-SW-01",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/products/FI-SW-01/items",
+            "description": "Retorna los 2 ítems del producto Angelfish (EST-1 Large, EST-2 Small)"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Retorna 2 ítems', () => {",
+                  "    pm.expect(pm.response.json()).to.be.an('array').with.lengthOf(2);",
+                  "});",
+                  "pm.test('Tiene producto anidado', () => {",
+                  "    pm.response.json().forEach(item => {",
+                  "        pm.expect(item.product).to.not.be.null;",
+                  "        pm.expect(item.product.productId).to.eql('FI-SW-01');",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Ítems de producto inexistente (404)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/products/UNKNOWN/items",
+            "description": "Debe retornar 404"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 404', () => pm.response.to.have.status(404));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Buscar por keyword: fish",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/products/search?keyword=fish",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products", "search"],
+              "query": [{ "key": "keyword", "value": "fish" }]
+            },
+            "description": "Busca productos cuyo nombre contenga 'fish'"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Retorna resultados', () => {",
+                  "    pm.expect(pm.response.json()).to.be.an('array').and.not.empty;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Buscar por keyword: golden",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/products/search?keyword=golden",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products", "search"],
+              "query": [{ "key": "keyword", "value": "golden" }]
+            },
+            "description": "Busca productos cuyo nombre contenga 'golden'"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Contiene Golden Retriever', () => {",
+                  "    const names = pm.response.json().map(p => p.name);",
+                  "    pm.expect(names).to.include('Golden Retriever');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Buscar sin resultados",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/products/search?keyword=xyznotexists",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products", "search"],
+              "query": [{ "key": "keyword", "value": "xyznotexists" }]
+            },
+            "description": "Keyword sin coincidencias — debe retornar lista vacía"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Lista vacía', () => {",
+                  "    pm.expect(pm.response.json()).to.be.an('array').with.lengthOf(0);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ítems",
+      "item": [
+        {
+          "name": "Obtener ítem EST-1",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/items/EST-1",
+            "description": "Retorna el ítem EST-1 (Angelfish Large) con quantity e información del producto anidado"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('itemId correcto', () => {",
+                  "    pm.expect(pm.response.json().itemId).to.eql('EST-1');",
+                  "});",
+                  "pm.test('quantity es 10000', () => {",
+                  "    pm.expect(pm.response.json().quantity).to.eql(10000);",
+                  "});",
+                  "pm.test('attribute1 es Large', () => {",
+                  "    pm.expect(pm.response.json().attribute1).to.eql('Large');",
+                  "});",
+                  "pm.test('producto anidado correcto', () => {",
+                  "    const product = pm.response.json().product;",
+                  "    pm.expect(product.productId).to.eql('FI-SW-01');",
+                  "    pm.expect(product.name).to.eql('Angelfish');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Obtener ítem EST-6",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/items/EST-6",
+            "description": "Retorna el ítem EST-6 (Bulldog Male Adult)"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('attribute1 es Male Adult', () => {",
+                  "    pm.expect(pm.response.json().attribute1).to.eql('Male Adult');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Obtener ítem inexistente (404)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/items/UNKNOWN",
+            "description": "Debe retornar 404 con JSON de error"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 404', () => pm.response.to.have.status(404));",
+                  "pm.test('error estructurado', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.status).to.eql(404);",
+                  "    pm.expect(body.error).to.eql('Not Found');",
+                  "    pm.expect(body.message).to.include('UNKNOWN');",
+                  "    pm.expect(body.timestamp).to.be.a('string');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.mybatis.jpetstore.catalog.mapper.ItemMapper">
+
+  <select id="getItemListByProduct" resultType="Item">
+    SELECT
+      i.itemid,
+      i.listprice,
+      i.unitcost,
+      i.supplier    AS supplierId,
+      i.status,
+      i.attr1       AS attribute1,
+      i.attr2       AS attribute2,
+      i.attr3       AS attribute3,
+      i.attr4       AS attribute4,
+      i.attr5       AS attribute5,
+      p.productid   AS "product.productId",
+      p.name        AS "product.name",
+      p.descn       AS "product.description",
+      p.category    AS "product.categoryId"
+    FROM item i
+    INNER JOIN product p ON p.productid = i.productid
+    WHERE i.productid = #{productId}
+  </select>
+
+  <select id="getItem" resultType="Item">
+    SELECT
+      i.itemid,
+      i.listprice,
+      i.unitcost,
+      i.supplier    AS supplierId,
+      i.status,
+      i.attr1       AS attribute1,
+      i.attr2       AS attribute2,
+      i.attr3       AS attribute3,
+      i.attr4       AS attribute4,
+      i.attr5       AS attribute5,
+      v.qty         AS quantity,
+      p.productid   AS "product.productId",
+      p.name        AS "product.name",
+      p.descn       AS "product.description",
+      p.category    AS "product.categoryId"
+    FROM item i
+    INNER JOIN product p   ON p.productid = i.productid
+    INNER JOIN inventory v ON v.itemid    = i.itemid
+    WHERE i.itemid = #{itemId}
+  </select>
+
+  <select id="getInventoryQuantity" resultType="int">
+    SELECT qty FROM inventory WHERE itemid = #{itemId}
+  </select>
+
+</mapper>

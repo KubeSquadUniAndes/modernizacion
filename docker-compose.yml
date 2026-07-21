@@ -1,0 +1,55 @@
+services:
+
+  # ── Base de datos del catalog-service ──────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: catalog-postgres
+    environment:
+      POSTGRES_DB: catalogdb
+      POSTGRES_USER: catalog
+      POSTGRES_PASSWORD: catalog
+    ports:
+      - "5432:5432"
+    volumes:
+      - catalog_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U catalog -d catalogdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Microservicio de catálogo ───────────────────────────────────────────────
+  catalog-service:
+    build:
+      context: ./catalog-service
+      dockerfile: Dockerfile
+    container_name: catalog-service
+    ports:
+      - "8081:8081"
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: catalogdb
+      DB_USER: catalog
+      DB_PASSWORD: catalog
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8081/actuator/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  # ── Monolito JPetStore ──────────────────────────────────────────────────────
+  jpetstore:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jpetstore
+    ports:
+      - "8080:8080"
+    restart: on-failure
+
+volumes:
+  catalog_pgdata:
