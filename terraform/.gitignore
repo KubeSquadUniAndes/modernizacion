@@ -1,0 +1,11 @@
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+terraform.tfvars
+crash.log
+crash.*.log
+
+# Generados por scripts/deploy_k8s.sh — contienen la password de la RDS
+k8s/secret.yaml
+k8s/deployment.yaml
