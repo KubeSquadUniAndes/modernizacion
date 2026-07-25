@@ -1,0 +1,843 @@
+{
+  "base_url": "http://a8cd044ff22884417a933c5bf3cf5f19-1646211324.us-east-1.elb.amazonaws.com:8081",
+  "generated_at": "2026-07-25T11:14:44.486884",
+  "endpoint_results": [
+    {
+      "name": "Disponibilidad",
+      "path": "/actuator/health",
+      "url": "http://a8cd044ff22884417a933c5bf3cf5f19-1646211324.us-east-1.elb.amazonaws.com:8081/actuator/health",
+      "expected_status": 200,
+      "status_code": 200,
+      "elapsed_ms": 212.17710000018997,
+      "passed": true,
+      "body_sample": "{\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"details\":{\"database\":\"PostgreSQL\",\"validationQuery\":\"isValid()\"}},\"diskSpace\":{\"status\":\"UP\",\"details\":{\"total\":21395124224,\"free\":17435471872,\"threshold\":10485760,\"path\":\"/app/.\",\"exists\":true}},\"livenessState\":{\"status\":\"UP\"},\"ping\":{\"status\":\"UP\"},\"readinessState\":{\"status\":\"UP\"}},\"groups\":[\"liveness\",\"readiness\"]}",
+      "error": ""
+    },
+    {
+      "name": "Categorias",
+      "path": "/api/categories",
+      "url": "http://a8cd044ff22884417a933c5bf3cf5f19-1646211324.us-east-1.elb.amazonaws.com:8081/api/categories",
+      "expected_status": 200,
+      "status_code": 200,
+      "elapsed_ms": 148.69249999992462,
+      "passed": true,
+      "body_sample": "[{\"categoryId\":\"FISH\",\"name\":\"Fish\",\"description\":\"<image src=\\\"../images/fish_icon.gif\\\"><font size=\\\"5\\\" color=\\\"blue\\\"> Fish</font>\"},{\"categoryId\":\"DOGS\",\"name\":\"Dogs\",\"description\":\"<image src=\\\"../images/dogs_icon.gif\\\"><font size=\\\"5\\\" color=\\\"blue\\\"> Dogs</font>\"},{\"categoryId\":\"REPTILES\",\"name\":\"Reptiles\",\"description\":\"<image src=\\\"../images/reptiles_icon.gif\\\"><font size=\\\"5\\\" color=\\\"blue\\\"> Reptiles</font>\"},{\"categoryId\":\"CATS\",\"name\":\"Cats\",\"description\":\"<image src=\\\"../images/cats_icon.gif\\\"><font size=\\\"5\\\" color=\\\"blue\\\"> Cats</font>\"},{\"categoryId\":\"BIRDS\",\"name\":\"Birds\",\"d",
+      "error": ""
+    },
+    {
+      "name": "Categoria FISH",
+      "path": "/api/categories/FISH",
+      "url": "http://a8cd044ff22884417a933c5bf3cf5f19-1646211324.us-east-1.elb.amazonaws.com:8081/api/categories/FISH",
+      "expected_status": 200,
+      "status_code": 200,
+      "elapsed_ms": 143.34630000030302,
+      "passed": true,
+      "body_sample": "{\"categoryId\":\"FISH\",\"name\":\"Fish\",\"description\":\"<image src=\\\"../images/fish_icon.gif\\\"><font size=\\\"5\\\" color=\\\"blue\\\"> Fish</font>\"}",
+      "error": ""
+    },
+    {
+      "name": "Productos FISH",
+      "path": "/api/categories/FISH/products",
+      "url": "http://a8cd044ff22884417a933c5bf3cf5f19-1646211324.us-east-1.elb.amazonaws.com:8081/api/categories/FISH/products",
+      "expected_status": 200,
+      "status_code": 200,
+      "elapsed_ms": 149.86119999957737,
+      "passed": true,
+      "body_sample": "[{\"productId\":\"FI-SW-01\",\"categoryId\":\"FISH\",\"name\":\"Angelfish\",\"description\":\"<image src=\\\"../images/fish1.gif\\\">Salt Water fish from Australia\"},{\"productId\":\"FI-SW-02\",\"categoryId\":\"FISH\",\"name\":\"Tiger Shark\",\"description\":\"<image src=\\\"../images/fish4.gif\\\">Salt Water fish from Australia\"},{\"productId\":\"FI-FW-01\",\"categoryId\":\"FISH\",\"name\":\"Koi\",\"description\":\"<image src=\\\"../images/fish3.gif\\\">Fresh Water fish from Japan\"},{\"productId\":\"FI-FW-02\",\"categoryId\":\"FISH\",\"name\":\"Goldfish\",\"description\":\"<image src=\\\"../images/fish2.gif\\\">Fresh Water fish from China\"}]",
+      "error": ""
+    },
+    {
+      "name": "Producto FI-SW-01",
+      "path": "/api/products/FI-SW-01",
+      "url": "http://a8cd044ff22884417a933c5bf3cf5f19-1646211324.us-east-1.elb.amazonaws.com:8081/api/products/FI-SW-01",
+      "expected_status": 200,
+      "status_code": 200,
+      "elapsed_ms": 138.40310000068712,
+      "passed": true,
+      "body_sample": "{\"productId\":\"FI-SW-01\",\"categoryId\":\"FISH\",\"name\":\"Angelfish\",\"description\":\"<image src=\\\"../images/fish1.gif\\\">Salt Water fish from Australia\"}",
+      "error": ""
+    },
+    {
+      "name": "Items FI-SW-01",
+      "path": "/api/products/FI-SW-01/items",
+      "url": "http://a8cd044ff22884417a933c5bf3cf5f19-1646211324.us-east-1.elb.amazonaws.com:8081/api/products/FI-SW-01/items",
+      "expected_status": 200,
+      "status_code": 200,
+      "elapsed_ms": 150.49160000035045,
+      "passed": true,
+      "body_sample": "[{\"itemId\":\"EST-1\",\"productId\":null,\"listPrice\":16.50,\"unitCost\":10.00,\"supplierId\":1,\"status\":\"P\",\"attribute1\":\"Large\",\"attribute2\":null,\"attribute3\":null,\"attribute4\":null,\"attribute5\":null,\"quantity\":0,\"product\":{\"productId\":\"FI-SW-01\",\"categoryId\":\"FISH\",\"name\":\"Angelfish\",\"description\":\"<image src=\\\"../images/fish1.gif\\\">Salt Water fish from Australia\"}},{\"itemId\":\"EST-2\",\"productId\":null,\"listPrice\":16.50,\"unitCost\":10.00,\"supplierId\":1,\"status\":\"P\",\"attribute1\":\"Small\",\"attribute2\":null,\"attribute3\":null,\"attribute4\":null,\"attribute5\":null,\"quantity\":0,\"product\":{\"productId\":\"FI-SW-01\",",
+      "error": ""
+    },
+    {
+      "name": "Item EST-1",
+      "path": "/api/items/EST-1",
+      "url": "http://a8cd044ff22884417a933c5bf3cf5f19-1646211324.us-east-1.elb.amazonaws.com:8081/api/items/EST-1",
+      "expected_status": 200,
+      "status_code": 200,
+      "elapsed_ms": 152.09830000003421,
+      "passed": true,
+      "body_sample": "{\"itemId\":\"EST-1\",\"productId\":null,\"listPrice\":16.50,\"unitCost\":10.00,\"supplierId\":1,\"status\":\"P\",\"attribute1\":\"Large\",\"attribute2\":null,\"attribute3\":null,\"attribute4\":null,\"attribute5\":null,\"quantity\":10000,\"product\":{\"productId\":\"FI-SW-01\",\"categoryId\":\"FISH\",\"name\":\"Angelfish\",\"description\":\"<image src=\\\"../images/fish1.gif\\\">Salt Water fish from Australia\"}}",
+      "error": ""
+    },
+    {
+      "name": "Busqueda fish",
+      "path": "/api/products/search?keyword=fish",
+      "url": "http://a8cd044ff22884417a933c5bf3cf5f19-1646211324.us-east-1.elb.amazonaws.com:8081/api/products/search?keyword=fish",
+      "expected_status": 200,
+      "status_code": 200,
+      "elapsed_ms": 152.5324999993245,
+      "passed": true,
+      "body_sample": "[{\"productId\":\"FI-SW-01\",\"categoryId\":\"FISH\",\"name\":\"Angelfish\",\"description\":\"<image src=\\\"../images/fish1.gif\\\">Salt Water fish from Australia\"},{\"productId\":\"FI-FW-02\",\"categoryId\":\"FISH\",\"name\":\"Goldfish\",\"description\":\"<image src=\\\"../images/fish2.gif\\\">Fresh Water fish from China\"}]",
+      "error": ""
+    },
+    {
+      "name": "Negativa categoria inexistente",
+      "path": "/api/categories/UNKNOWN",
+      "url": "http://a8cd044ff22884417a933c5bf3cf5f19-1646211324.us-east-1.elb.amazonaws.com:8081/api/categories/UNKNOWN",
+      "expected_status": 404,
+      "status_code": 404,
+      "elapsed_ms": 139.8351999996521,
+      "passed": true,
+      "body_sample": "{\"timestamp\":\"2026-07-25T16:13:55.823138605Z\",\"status\":404,\"error\":\"Not Found\",\"message\":\"Category not found: UNKNOWN\"}",
+      "error": ""
+    }
+  ],
+  "load_summary": {
+    "total_requests": 100,
+    "concurrency": 10,
+    "total_elapsed_seconds": 1.8525483999992503,
+    "throughput_rps": 53.979696292976996,
+    "success_count": 100,
+    "error_count": 0,
+    "success_rate": 100.0,
+    "min_ms": 135.7105999995838,
+    "avg_ms": 168.02904899994246,
+    "median_ms": 157.44770000037533,
+    "p95_ms": 207.66194500038182,
+    "max_ms": 291.29850000026636,
+    "status_counts": {
+      "200": 100
+    }
+  },
+  "load_results": [
+    {
+      "index": 1,
+      "status_code": 200,
+      "elapsed_ms": 158.41679999994085,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 2,
+      "status_code": 200,
+      "elapsed_ms": 159.62649999983114,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 3,
+      "status_code": 200,
+      "elapsed_ms": 148.6596999993708,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 4,
+      "status_code": 200,
+      "elapsed_ms": 164.039799999955,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 5,
+      "status_code": 200,
+      "elapsed_ms": 150.3355000004376,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 6,
+      "status_code": 200,
+      "elapsed_ms": 156.31979999943724,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 7,
+      "status_code": 200,
+      "elapsed_ms": 155.79429999979766,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 8,
+      "status_code": 200,
+      "elapsed_ms": 145.3588000003947,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 9,
+      "status_code": 200,
+      "elapsed_ms": 160.0125000004482,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 10,
+      "status_code": 200,
+      "elapsed_ms": 152.28620000016235,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 11,
+      "status_code": 200,
+      "elapsed_ms": 177.74929999995948,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 12,
+      "status_code": 200,
+      "elapsed_ms": 156.45860000040557,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 13,
+      "status_code": 200,
+      "elapsed_ms": 157.22890000051848,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 14,
+      "status_code": 200,
+      "elapsed_ms": 156.54900000026828,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 15,
+      "status_code": 200,
+      "elapsed_ms": 154.45090000048367,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 16,
+      "status_code": 200,
+      "elapsed_ms": 153.4879999999248,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 17,
+      "status_code": 200,
+      "elapsed_ms": 149.86829999998008,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 18,
+      "status_code": 200,
+      "elapsed_ms": 167.4198000000615,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 19,
+      "status_code": 200,
+      "elapsed_ms": 142.38209999984974,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 20,
+      "status_code": 200,
+      "elapsed_ms": 157.6665000002322,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 21,
+      "status_code": 200,
+      "elapsed_ms": 143.73279999927036,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 22,
+      "status_code": 200,
+      "elapsed_ms": 146.00140000038664,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 23,
+      "status_code": 200,
+      "elapsed_ms": 148.48540000002686,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 24,
+      "status_code": 200,
+      "elapsed_ms": 135.7105999995838,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 25,
+      "status_code": 200,
+      "elapsed_ms": 144.63179999984277,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 26,
+      "status_code": 200,
+      "elapsed_ms": 142.5812000006772,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 27,
+      "status_code": 200,
+      "elapsed_ms": 141.94860000043263,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 28,
+      "status_code": 200,
+      "elapsed_ms": 148.62649999940913,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 29,
+      "status_code": 200,
+      "elapsed_ms": 140.6669999996666,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 30,
+      "status_code": 200,
+      "elapsed_ms": 147.2565999993094,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 31,
+      "status_code": 200,
+      "elapsed_ms": 140.6053000000611,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 32,
+      "status_code": 200,
+      "elapsed_ms": 144.7334000004048,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 33,
+      "status_code": 200,
+      "elapsed_ms": 139.99640000020008,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 34,
+      "status_code": 200,
+      "elapsed_ms": 151.1419999997088,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 35,
+      "status_code": 200,
+      "elapsed_ms": 145.9562999998525,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 36,
+      "status_code": 200,
+      "elapsed_ms": 144.33800000006158,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 37,
+      "status_code": 200,
+      "elapsed_ms": 151.73159999994823,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 38,
+      "status_code": 200,
+      "elapsed_ms": 153.9682000002358,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 39,
+      "status_code": 200,
+      "elapsed_ms": 150.98049999960494,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 40,
+      "status_code": 200,
+      "elapsed_ms": 161.35399999984656,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 41,
+      "status_code": 200,
+      "elapsed_ms": 141.94169999973383,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 42,
+      "status_code": 200,
+      "elapsed_ms": 185.95360000017536,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 43,
+      "status_code": 200,
+      "elapsed_ms": 189.85150000025897,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 44,
+      "status_code": 200,
+      "elapsed_ms": 155.87760000016715,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 45,
+      "status_code": 200,
+      "elapsed_ms": 153.92619999965973,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 46,
+      "status_code": 200,
+      "elapsed_ms": 226.7080999999962,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 47,
+      "status_code": 200,
+      "elapsed_ms": 197.5758999997197,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 48,
+      "status_code": 200,
+      "elapsed_ms": 166.94449999977223,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 49,
+      "status_code": 200,
+      "elapsed_ms": 172.89729999993142,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 50,
+      "status_code": 200,
+      "elapsed_ms": 155.3327999999965,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 51,
+      "status_code": 200,
+      "elapsed_ms": 153.95059999991645,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 52,
+      "status_code": 200,
+      "elapsed_ms": 170.3453999998601,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 53,
+      "status_code": 200,
+      "elapsed_ms": 169.09260000011272,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 54,
+      "status_code": 200,
+      "elapsed_ms": 174.0261000004466,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 55,
+      "status_code": 200,
+      "elapsed_ms": 151.99260000008508,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 56,
+      "status_code": 200,
+      "elapsed_ms": 143.57559999916703,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 57,
+      "status_code": 200,
+      "elapsed_ms": 164.25600000002305,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 58,
+      "status_code": 200,
+      "elapsed_ms": 158.2771999992474,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 59,
+      "status_code": 200,
+      "elapsed_ms": 156.64159999960248,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 60,
+      "status_code": 200,
+      "elapsed_ms": 153.67450000030658,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 61,
+      "status_code": 200,
+      "elapsed_ms": 149.11099999972066,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 62,
+      "status_code": 200,
+      "elapsed_ms": 141.06530000026396,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 63,
+      "status_code": 200,
+      "elapsed_ms": 157.03780000058032,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 64,
+      "status_code": 200,
+      "elapsed_ms": 154.73440000005212,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 65,
+      "status_code": 200,
+      "elapsed_ms": 146.8148999992991,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 66,
+      "status_code": 200,
+      "elapsed_ms": 169.71170000033453,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 67,
+      "status_code": 200,
+      "elapsed_ms": 155.75639999951818,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 68,
+      "status_code": 200,
+      "elapsed_ms": 152.678499999638,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 69,
+      "status_code": 200,
+      "elapsed_ms": 173.9118999994389,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 70,
+      "status_code": 200,
+      "elapsed_ms": 142.01409999986936,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 71,
+      "status_code": 200,
+      "elapsed_ms": 145.23839999947086,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 72,
+      "status_code": 200,
+      "elapsed_ms": 197.11349999943195,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 73,
+      "status_code": 200,
+      "elapsed_ms": 177.81170000034763,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 74,
+      "status_code": 200,
+      "elapsed_ms": 177.83159999999043,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 75,
+      "status_code": 200,
+      "elapsed_ms": 169.49029999977938,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 76,
+      "status_code": 200,
+      "elapsed_ms": 203.70060000004742,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 77,
+      "status_code": 200,
+      "elapsed_ms": 189.16339999941556,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 78,
+      "status_code": 200,
+      "elapsed_ms": 197.37680000071123,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 79,
+      "status_code": 200,
+      "elapsed_ms": 185.97140000019863,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 80,
+      "status_code": 200,
+      "elapsed_ms": 191.6601000002629,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 81,
+      "status_code": 200,
+      "elapsed_ms": 172.43059999964316,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 82,
+      "status_code": 200,
+      "elapsed_ms": 199.95669999934762,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 83,
+      "status_code": 200,
+      "elapsed_ms": 197.3203999996258,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 84,
+      "status_code": 200,
+      "elapsed_ms": 190.67919999997684,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 85,
+      "status_code": 200,
+      "elapsed_ms": 197.28649999979098,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 86,
+      "status_code": 200,
+      "elapsed_ms": 217.59800000018004,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 87,
+      "status_code": 200,
+      "elapsed_ms": 216.52649999941787,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 88,
+      "status_code": 200,
+      "elapsed_ms": 207.40480000040407,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 89,
+      "status_code": 200,
+      "elapsed_ms": 212.54769999995915,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 90,
+      "status_code": 200,
+      "elapsed_ms": 204.34889999978623,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 91,
+      "status_code": 200,
+      "elapsed_ms": 291.29850000026636,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 92,
+      "status_code": 200,
+      "elapsed_ms": 202.22329999978683,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 93,
+      "status_code": 200,
+      "elapsed_ms": 204.28420000007463,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 94,
+      "status_code": 200,
+      "elapsed_ms": 205.3729999997813,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 95,
+      "status_code": 200,
+      "elapsed_ms": 195.67389999974694,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 96,
+      "status_code": 200,
+      "elapsed_ms": 183.38939999921422,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 97,
+      "status_code": 200,
+      "elapsed_ms": 183.9207000002716,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 98,
+      "status_code": 200,
+      "elapsed_ms": 185.45700000049692,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 99,
+      "status_code": 200,
+      "elapsed_ms": 185.17849999989267,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "index": 100,
+      "status_code": 200,
+      "elapsed_ms": 180.41300000004412,
+      "ok": true,
+      "error": ""
+    }
+  ],
+  "kubernetes": {
+    "pods": "NAME                               READY   STATUS    RESTARTS   AGE\ncatalog-service-79958b6f54-xrbx5   1/1     Running   0          27m",
+    "service": "NAME              TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)          AGE\ncatalog-service   LoadBalancer   10.100.69.245   a8cd044ff22884417a933c5bf3cf5f19-1646211324.us-east-1.elb.amazonaws.com   8081:30242/TCP   27m"
+  },
+  "report": "reports\\informe-pruebas-catalog-service-con-evidencias.docx",
+  "charts": [
+    "reports\\charts\\endpoint_latencies.png",
+    "reports\\charts\\http_status_counts.png",
+    "reports\\charts\\load_latency_summary.png",
+    "reports\\charts\\load_latency_histogram.png"
+  ],
+  "screenshots": [
+    "reports\\charts\\evidence_1.png",
+    "reports\\charts\\evidence_2.png",
+    "reports\\charts\\evidence_3.png",
+    "reports\\charts\\evidence_4.png",
+    "reports\\charts\\evidence_5.png",
+    "reports\\charts\\evidence_6.png"
+  ]
+}
