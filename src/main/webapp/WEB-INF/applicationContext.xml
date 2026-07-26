@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-       Copyright 2010-2023 the original author or authors.
+       Copyright 2010-2026 the original author or authors.
 
        Licensed under the Apache License, Version 2.0 (the "License");
        you may not use this file except in compliance with the License.
@@ -37,6 +37,9 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
+
+    <!-- permite que @Value resuelva variables de entorno (ej. CATALOG_SERVICE_URL) -->
+    <context:property-placeholder ignore-resource-not-found="true" />
 
     <!-- enable component scanning and autowire (beware that this does not enable mapper scanning!) -->
     <context:component-scan base-package="org.mybatis.jpetstore.service" />
